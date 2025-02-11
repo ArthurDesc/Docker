@@ -18,9 +18,9 @@ const App = () => {
           }}
           className="cyber-icon"
         />
-        <h1 className="cyberpunk-title">Congratulations!!!</h1>
+        <h1 className="cyberpunk-title">Yessss bien joué!!!</h1>
         <p className="cyberpunk-text">
-          You ran your first container.
+          Vous avez lancer votre premier conteneur.
         </p>
         <div className="cyberpunk-buttons">
           <a

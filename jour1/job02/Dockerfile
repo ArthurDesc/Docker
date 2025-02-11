@@ -1,5 +1,4 @@
-# Stage de build
-FROM node:18-alpine as build
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -12,20 +11,8 @@ RUN npm ci
 # Copie du reste des fichiers du projet
 COPY . .
 
-# Build de l'application
-RUN npm run build
+# Exposition du port 3000 (port par défaut de React)
+EXPOSE 3000
 
-# Stage de production
-FROM nginx:alpine
-
-# Copie de la configuration nginx personnalisée si nécessaire
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copie des fichiers buildés depuis l'étape de build
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Exposition du port 80
-EXPOSE 80
-
-# Démarrage de nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Démarrage de l'application
+CMD ["npm", "start"]
