@@ -1,11 +1,30 @@
+# Job 05 - Morpion avec Docker et Nginx
+
+## Captures d'écran du projet
+
+### 1. Sauvegarde des résultats
+![Résultats du jeu](./images/Capture%20d'écran%202025-02-12%20135534.png)
+Cette capture montre le contenu du fichier results.json après plusieurs parties :
+- Une victoire du joueur X
+- Un match nul (tie)
+- Une autre victoire du joueur X
+Les résultats sont stockés avec la date et l'heure de chaque partie.
+
+### 2. Logs du conteneur
+![Logs du conteneur](./images/Capture%20d'écran%202025-02-12%20134829.png)
+Cette capture montre les logs du conteneur Docker, démontrant :
+- Le démarrage réussi de Nginx
+- L'initialisation des processus worker
+- Les requêtes HTTP traitées
+- La communication réussie entre le frontend et le backend PHP
+
+## Configuration
+- Image de base : Nginx
+- Port exposé : 8080
+- Volume pour les résultats : game-results
+- PHP-FPM configuré pour gérer les scripts PHP
 
 ### Terminal avec commandes Docker
-![Commandes Docker](./images/Capture%20d'écran%202025-02-12%20094550.png)
-Cette capture montre l'exécution de plusieurs commandes Docker importantes :
-1. `docker ps` : Affiche les conteneurs en cours d'exécution
-2. `docker stop stoic_lichterman` : Arrête un conteneur spécifique
-3. `docker images` : Liste toutes les images Docker disponibles
-4. `docker run -d -p 8000:80 my-apache-server` : Lance un nouveau conteneur
-5. `docker stop charming_heisenberg` : Arrête un autre conteneur
-6. `docker build -t my-apache-server .` : Reconstruit l'image
+![Commandes Docker](./images/C)
+
 
