@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 // Récupérer les données POST
 $data = json_decode(file_get_contents('php://input'), true);
 
-// Chemin vers le fichier results.json
-$file = 'results.json';
+// Chemin vers le fichier results.json dans le volume
+$file = 'data/results.json';
 
 // Lire les résultats existants
 $results = [];
