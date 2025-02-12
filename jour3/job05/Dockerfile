@@ -1,24 +1,32 @@
-FROM php:8.2-apache
+FROM nginx:latest
 
-# Activation du module rewrite d'Apache
-RUN a2enmod rewrite
+# Installation de PHP-FPM
+RUN apt-get update && apt-get install -y \
+    php8.2-fpm \
+    && rm -rf /var/lib/apt/lists/*
 
-# Configuration du DocumentRoot
-ENV APACHE_DOCUMENT_ROOT /var/www/html
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Configuration de PHP-FPM pour écouter sur un port TCP
+RUN sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 9000/' /etc/php/8.2/fpm/pool.d/www.conf
 
 # Copie des fichiers du jeu
-COPY index.php /var/www/html/
-COPY index.html /var/www/html/
+COPY index.php /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
 
 # Création du volume pour les résultats
-VOLUME /var/www/html/data
-COPY save.php /var/www/html/data/
-COPY results.json /var/www/html/data/
+VOLUME /usr/share/nginx/html/data
+COPY save.php /usr/share/nginx/html/data/
+COPY results.json /usr/share/nginx/html/data/
 
 # Configuration des permissions
-RUN chown -R www-data:www-data /var/www/html/data
+RUN chown -R www-data:www-data /usr/share/nginx/html
 
-# Exposition du port
+# Configuration de Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Script de démarrage
+COPY start.sh /
+RUN chmod +x /start.sh
+
 EXPOSE 80
+
+CMD ["/start.sh"]
