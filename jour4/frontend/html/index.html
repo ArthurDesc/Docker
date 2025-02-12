@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Multi-Container</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de l'Application Multi-Conteneurs</h1>
+    
+    <button class="test-button" onclick="testBackend()">Tester le Backend</button>
+    <button class="test-button" onclick="testDatabase()">Tester la Base de Données</button>
+    
+    <div id="results">Les résultats apparaîtront ici...</div>
+
+    <script>
+        async function testBackend() {
+            try {
+                const response = await fetch('/api/test');
+                const data = await response.json();
+                document.getElementById('results').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('results').innerText = 'Erreur: ' + error.message;
+            }
+        }
+
+        async function testDatabase() {
+            try {
+                const response = await fetch('/api/db-test');
+                const data = await response.json();
+                document.getElementById('results').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('results').innerText = 'Erreur: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html> 
