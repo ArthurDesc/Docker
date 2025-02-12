@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
 RUN sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 9000/' /etc/php/8.2/fpm/pool.d/www.conf
 
 # Copie des fichiers du jeu
-COPY index.php /usr/share/nginx/html/
 COPY index.html /usr/share/nginx/html/
 COPY save.php /usr/share/nginx/html/
 
