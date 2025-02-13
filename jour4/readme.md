@@ -142,3 +142,28 @@ Note : Cette configuration est destinée au développement. Pour la production :
 3. Configurez HTTPS
 4. Limitez les ports exposés
 5. Utilisez des secrets Docker pour les informations sensibles
+
+## Captures d'écran
+
+### 1. Démarrage des Services
+![Démarrage des Services](./images/image.png)
+Cette capture d'écran montre le démarrage réussi de tous les services :
+- Les conteneurs sont créés dans l'ordre : adminer, backend, db, et frontend
+- MySQL démarre et initialise sa base de données
+- Le serveur PHP d'Adminer démarre sur le port 8080
+- Les logs montrent les différentes étapes d'initialisation de MySQL
+
+### 2. Build des Conteneurs
+![Build des Conteneurs](./images/image%20copy.png)
+Cette capture montre le processus de build des conteneurs :
+- Téléchargement des images de base
+- Construction du backend avec Node.js
+- Installation des dépendances npm
+- Construction du frontend avec Nginx
+- Les temps d'exécution de chaque étape sont affichés
+
+Ces captures démontrent que :
+1. L'architecture multi-conteneurs fonctionne correctement
+2. Tous les services démarrent sans erreur
+3. Les connexions entre les services sont établies
+4. Le système de logging fonctionne et permet de suivre l'état des services
