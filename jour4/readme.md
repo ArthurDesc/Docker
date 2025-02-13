@@ -40,12 +40,13 @@ Une fois les conteneurs démarrés, vous pouvez accéder aux différents service
 
 - **Frontend** : http://localhost:8080
 - **Backend API** : http://localhost:3000
-  - Point d'accès de test : http://localhost:3000/api/status
+  - Point d'accès de test : http://localhost:3000/api/test
+  - Point d'accès base de données : http://localhost:3000/api/db-test
 - **Adminer** (gestionnaire de base de données) : http://localhost:8081
   - Système : MySQL
   - Serveur : db
-  - Utilisateur : root
-  - Mot de passe : root
+  - Utilisateur : user
+  - Mot de passe : password
   - Base de données : projetdb
 - **MySQL** : localhost:3306 (accessible depuis votre machine hôte)
 
@@ -60,13 +61,18 @@ Une fois les conteneurs démarrés, vous pouvez accéder aux différents service
 - Port : 3000
 - API RESTful
 - Connexion à la base de données MySQL
+- Routes disponibles :
+  - /api/test : Test du backend
+  - /api/db-test : Test de la base de données
+  - /api/status : État du serveur
 
 ### Base de données (MySQL)
 - Port : 3306
 - Base de données : projetdb
-- Utilisateur : root
-- Mot de passe : root
+- Utilisateur : user
+- Mot de passe : password
 - Volume persistant pour les données
+- Table de test : test_table
 
 ### Adminer
 - Port : 8081
@@ -95,7 +101,7 @@ docker-compose logs [service]
 ### Accès au Shell des Conteneurs
 ```bash
 # Accéder au shell MySQL
-docker exec -it jour4-db-1 mysql -uroot -proot
+docker exec -it jour4-db-1 mysql -uuser -ppassword projetdb
 
 # Accéder au shell du backend
 docker exec -it jour4-backend-1 sh
@@ -124,8 +130,8 @@ docker exec -it jour4-frontend-1 sh
 Pour développer localement :
 
 1. Les modifications du code source sont automatiquement prises en compte grâce aux volumes montés
-2. Le backend utilise nodemon pour le rechargement automatique
-3. Les fichiers statiques du frontend peuvent être modifiés directement dans le dossier frontend/html
+2. Les fichiers statiques du frontend peuvent être modifiés directement dans le dossier frontend/html
+3. Les modifications du backend nécessitent un redémarrage du conteneur
 
 ## Sécurité
 
