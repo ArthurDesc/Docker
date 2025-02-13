@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,20 +80,12 @@
         const cells = document.querySelectorAll('td');
 
         async function saveResults(winner) {
-            try {
-                const response = await fetch('save.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        winner: winner,
-                        date: new Date().toISOString()
-                    })
-                });
-                return response.ok;
-            } catch (error) {
-                console.error('Erreur lors de la sauvegarde:', error);
-                return false;
-            }
+            const response = await fetch('/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ winner }),
+            });
+            return response.ok;
         }
 
         function makeMove(cell) {
@@ -114,7 +106,7 @@
             // Vérifier si c'est un match nul
             if (Array.from(cells).every(cell => cell.textContent !== '')) {
                 statusDisplay.textContent = "C'est un match nul !";
-                saveResults('tie');
+                saveResults('Draw');
                 gameActive = false;
                 return;
             }

@@ -19,7 +19,7 @@ if (file_exists($file)) {
 // Ajouter le nouveau résultat
 $results[] = [
     'winner' => $data['winner'],
-    'date' => $data['date']
+    'date' => date('c') // Format ISO 8601
 ];
 
 // Sauvegarder dans le fichier
