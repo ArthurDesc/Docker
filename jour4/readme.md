@@ -162,8 +162,19 @@ Cette capture montre le processus de build des conteneurs :
 - Construction du frontend avec Nginx
 - Les temps d'exécution de chaque étape sont affichés
 
+### 3. Accès à MySQL en Ligne de Commande
+![Accès MySQL CLI](./images/image%20copy%202.png)
+Cette capture montre l'accès réussi à MySQL via le terminal :
+- Connexion au conteneur MySQL avec `docker exec -it`
+- Authentification réussie en tant qu'utilisateur root
+- Affichage des bases de données disponibles avec `SHOW DATABASES;`
+- On peut voir la base `projetdb` ainsi que les bases système de MySQL
+- Version du serveur MySQL (8.0.41)
+- Interface de commande MySQL fonctionnelle
+
 Ces captures démontrent que :
 1. L'architecture multi-conteneurs fonctionne correctement
 2. Tous les services démarrent sans erreur
 3. Les connexions entre les services sont établies
 4. Le système de logging fonctionne et permet de suivre l'état des services
+5. L'accès à la base de données en ligne de commande est opérationnel
